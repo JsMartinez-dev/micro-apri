@@ -16,7 +16,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Dashboard Usuarios</title>
-        <link rel="stylesheet" href="css/styleUserDash_1.css"/>
+        <link rel="stylesheet" href="css/styleUserDash_2.css">
     </head>
 
     <body>
@@ -64,7 +64,7 @@
                         <img src="img/Logo2.png" width="190" height="150" alt="Logo pagina" />
                 </div>
                 <nav>
-                    <a href="ApiGateway/usuario/dashboard?accion=dashboardUser"  class="menu-item active">Dashboard</a>
+                    <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=dashboardUser"  class="menu-item active">Dashboard</a>
                     <div class="menu-item ">Mi aprendizaje</div>
                     <div class="menu-item">Cursos populares</div>
                     <div class="menu-item">Material educativo disponible</div>
@@ -85,6 +85,7 @@
                         <form action="ElegirMaterial.jsp">
                         <button class="add-resource-btn">+ Agregar Recurso Educativo</button>
                         </form>
+                        
                     </div>
                 </header>
 
@@ -95,6 +96,7 @@
                         <div class="stat-info">
                             <h3>Tus libros</h3>
                             <p><%=cantLibros%></p>
+                            <button class="add-resource-btn2">Ver</button>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -102,6 +104,7 @@
                         <div class="stat-info">
                             <h3>Tus artículos</h3>
                             <p><%=cantArticulos%></p>
+                            <button class="add-resource-btn2">Ver</button>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -109,6 +112,7 @@
                         <div class="stat-info">
                             <h3>Tus cursos</h3>
                             <p><%=cantCursos%></p>
+                            <button class="add-resource-btn2">Ver</button>
                         </div>
                     </div>
 

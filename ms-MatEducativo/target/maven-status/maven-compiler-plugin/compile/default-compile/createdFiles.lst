@@ -10,6 +10,7 @@ modelo\Curso.class
 modelo\Modulo.class
 com\apri\ms\mateducativo\JakartaRestConfiguration.class
 modelo\ComentarioPQRs.class
+dto\DtoLibroRegistro.class
 modelo\Descarga.class
 modelo\PQRs.class
 modelo\Administrador.class

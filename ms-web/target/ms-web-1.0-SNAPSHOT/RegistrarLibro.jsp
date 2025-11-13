@@ -4,7 +4,8 @@
     Author     : ACER-A315-59
 --%>
 
-<%@page import="modelo.Usuario"%>
+<%@page import="utilidad.Ruta"%>
+<%@page import="dto.DtoUsuarioLogin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,19 +13,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <link rel="stylesheet" href="css/styleUserDash_1.css"/>
+         <link rel="stylesheet" href="css/styleUserDash_2.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     </head>
     <body>
         
         <%
-            //Validamos que el usuario llego correctamente
             HttpSession sesion = request.getSession(false);
             if(sesion ==null || sesion.getAttribute("usuario") ==null){
                 response.sendRedirect("InicioSesionUsuario.jsp");
                 return;
             }
             
-            Usuario user_login = (Usuario) sesion.getAttribute("usuario");
+            DtoUsuarioLogin userDto = (DtoUsuarioLogin) sesion.getAttribute("usuario");
 
         %>
         
@@ -35,13 +38,13 @@
                         <img src="img/Logo2.png" width="190" height="150" alt="Logo pagina" />
                 </div>
                 <nav>
-                    <a href="UsuarioControll?accion=dashboardUser"  class="menu-item active" >Dashboard</a>
+                    <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=dashboardUser"  class="menu-item active" >Dashboard</a>
                     <div class="menu-item ">Mi aprendizaje</div>
                     <div class="menu-item">Cursos populares</div>
                     <div class="menu-item">Material educativo disponible</div>
                     <div class="menu-item">Mi perfil</div>
                     <div class="menu-item">Opciones</div>
-                    <a href="CerrarSesion"  class="menu-item" >Cerrar sesión </a>
+                    <a href="<%=Ruta.MS_USUARIO_URL%>/CerrarSesion"  class="menu-item" >Cerrar sesión </a>
   
                 </nav>
             </aside>
@@ -49,12 +52,12 @@
             <main class="main-content">
                 <header class="header">
                     <div class="header-right">
-                     <a href="UsuarioControll?accion=dashboardUser" class="add-cancel-btn" style="display: inline-block; text-decoration: none;">Cancelar</a>
+                     <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=dashboardUser" class="add-cancel-btn" style="display: inline-block; text-decoration: none;">Cancelar</a>
                     </div>
                 </header>
 
                 <h1 style="text-align: center; padding: 20px">Digita información del libro</h1>
-                <form action="LibroControll" method="POST" enctype="multipart/form-data" class="form-container">
+                <form action="<%=Ruta.MS_MATEDU_URL%>/LibroControll?accion=register&idUsuario=<%=userDto.id_persona()%>" method="POST" enctype="multipart/form-data" class="form-container">
 
                 <div class="form-group">
                     <label for="nombreLibro">Nombre</label>
@@ -112,8 +115,8 @@
 
          </main>
         <%
-            String exito = (String) request.getAttribute("mensaje");
-            String fallo = (String) request.getAttribute("error");
+            String exito = request.getParameter("mensaje");
+            String fallo = request.getParameter("error");
             String titulo = null, text = null, icon = null;
 
             if(exito != null){

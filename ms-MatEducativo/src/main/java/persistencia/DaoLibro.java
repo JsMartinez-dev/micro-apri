@@ -1,6 +1,7 @@
  
 package persistencia;
 
+import dto.DtoLibroRegistro;
 import dto.DtoMatEducativo;
 import java.io.InputStream;
 import java.util.List;
@@ -10,7 +11,7 @@ import modelo.*;
 
 public interface DaoLibro {
      
-    public boolean registrar(Libro libro, Usuario usuario,InputStream inputStream) throws Exception;
+    public boolean registrar(DtoLibroRegistro libro, InputStream inputStream) throws Exception;
     public boolean actualizar(Libro libro) throws Exception;
     public boolean eliminar(Libro libro) throws Exception;
     public List<Libro> listar() throws Exception; 

@@ -5,6 +5,7 @@
 package presentacion;
 
 import com.google.gson.Gson;
+import dto.DtoLibroRegistro;
 import dto.DtoMatEducativo;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -13,15 +14,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import java.util.List;
-import modelo.Libro;
-import modelo.Usuario;
 import servicio.LibroServicio;
+import utilidad.Ruta;
 
 /**
  *
@@ -102,7 +100,6 @@ public class LibroControll extends HttpServlet {
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             enviarError(response, "Error interno: " + e.getMessage());
-            e.printStackTrace();
         }
     }
     
@@ -122,53 +119,81 @@ public class LibroControll extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if(request.getParameter("accion")==null){
+            response.sendRedirect(Ruta.MS_WEB+"/RegistrarUsuario.jsp?error=No se pudo guardar la sesion");
+            return;
+        }
         
-        HttpSession sesion = request.getSession(false);
-        System.out.println("LLEGO SERVLET");
+        String accion = request.getParameter("accion");
+        System.out.println("Accion del DOPOST libro : "+accion);
+        
+        switch (accion) {
+            case "register" -> registrarLibro(request,response);
+            default -> throw new AssertionError();
+        }
+       
+    }
+    
+    @Override
+    public String getServletInfo() {
+        return "Controlador de Libros con soporte JSON";
+    }
+
+    private void registrarLibro(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException 
+    {
+        
         
         String nombreLibro = request.getParameter("nombreLibro");
         String descripcion = request.getParameter("Descripcion");
         String categoria = request.getParameter("Categoria");
         int edicion = Integer.parseInt(request.getParameter("edicion"));
         String año_publi = request.getParameter("AñoPublicacion");
-        LocalDate año_publicacion = LocalDate.parse(año_publi);
         String editorial = request.getParameter("Editorial");
         int cantPaginas = Integer.parseInt(request.getParameter("cantPaginas"));
-   
+
         InputStream inputStream = null;
         Part filePart = request.getPart("archivoPDF");
-        if(filePart != null){
+
+        System.out.println("Nombre del libro: " + nombreLibro);
+        System.out.println("Descripción: " + descripcion);
+        System.out.println("Categoría: " + categoria);
+        System.out.println("Edición: " + edicion);
+        System.out.println("Año de publicación (String): " + año_publi);
+        System.out.println("Editorial: " + editorial);
+        System.out.println("Cantidad de páginas: " + cantPaginas);
+
+        if (filePart != null) {
+            System.out.println("Archivo PDF recibido: " + filePart.getSubmittedFileName());
+            System.out.println("Tamaño del archivo (bytes): " + filePart.getSize());
+            System.out.println("Tipo de contenido: " + filePart.getContentType());
             inputStream = filePart.getInputStream();
-            System.out.println("NO ESTA VACIO ");
+            System.out.println("NO ESTÁ VACÍO");
         } else {
-            System.out.println("ESTA VACIO ");
+            System.out.println("ESTÁ VACÍO");
         }
+
+
    
-        Usuario user = (Usuario) sesion.getAttribute("usuario");
-        Libro librito = new Libro(edicion, editorial, cantPaginas, 1, categoria, nombreLibro, 
-                                   año_publicacion, "libro", descripcion, true, user);
+        int id_usuario = Integer.parseInt(request.getParameter("idUsuario"));
+        System.out.println("Id del usuario que va a guardar el libro: "+id_usuario);
+        DtoLibroRegistro dtoLibro = new DtoLibroRegistro(1, id_usuario, nombreLibro, descripcion, categoria, edicion, año_publi, cantPaginas,"libro",editorial);
      
         try {
-            if(subirMatServicio.subirLibro(librito, user, inputStream)){
-                request.setAttribute("mensaje", "Ingreso exitoso");
-                request.getRequestDispatcher("RegistrarLibro.jsp").forward(request, response);
+            if(subirMatServicio.subirLibro(dtoLibro, inputStream)){
+                response.sendRedirect(Ruta.MS_WEB+"/RegistrarLibro.jsp?mensaje=Ingreso exitoso");
+
             } else {
-                request.setAttribute("error", "No se pudo agregar libro");
-                request.getRequestDispatcher("RegistrarLibro.jsp").forward(request, response);                
+                response.sendRedirect(Ruta.MS_WEB+"/RegistrarLibro.jsp?error=No se pudo subir el libro");
             }
         } catch (NumberFormatException ex) {
-            request.setAttribute("error", "Error en formato de números: " + ex.getMessage());
-            request.getRequestDispatcher("RegistrarLibro.jsp").forward(request, response);
+                response.sendRedirect(Ruta.MS_WEB+"/RegistrarLibro.jsp?error=En formato de numero");
+
         } catch (Exception ex) {
-            request.setAttribute("error", "Error al procesar: " + ex.getMessage());
-            request.getRequestDispatcher("RegistrarLibro.jsp").forward(request, response);
-            ex.printStackTrace();
+                response.sendRedirect(Ruta.MS_WEB+"/RegistrarUsuario.jsp?error=Error general");
+
         }
-    }
-    
-    @Override
-    public String getServletInfo() {
-        return "Controlador de Libros con soporte JSON";
+        
+
     }
     
     /**
