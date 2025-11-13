@@ -1,0 +1,179 @@
+
+
+/* Reset y estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahomas, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #3f526e 50%, #f5f7fa 50%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Contenedor principal del formulario */
+.form-container {
+    background: #e4ebf2;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(64, 78, 107, 0.2);
+}
+a{
+    text-decoration: none;
+    color: #404e6b;
+}
+
+/* Título principal */
+h1 {
+    color: #404e6b;
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Grupo de input */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Labels */
+label {
+    color: #404e6b;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(64, 78, 107, 0.1);
+    color: #404e6b;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(64, 78, 107, 0.2);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: rgba(64, 78, 107, 0.5);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    background: rgba(64, 78, 107, 0.15);
+    box-shadow: 0 0 0 2px rgba(64, 78, 107, 0.3);
+}
+
+/* Input de fecha - estilos especiales */
+input[type="date"] {
+    color-scheme: light;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+/* Botón de submit */
+button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background: #404e6b;
+    color: #e5ecf2;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background: #2f3a4f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(64, 78, 107, 0.4);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Estilos para el combo box (select) */
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(64, 78, 107, 0.1);
+    color: #404e6b;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(64, 78, 107, 0.2);
+    appearance: none; /* quita la flecha nativa */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23404e6b" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 20,0 10,10"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+select:focus {
+    outline: none;
+    background: rgba(64, 78, 107, 0.15);
+    box-shadow: 0 0 0 2px rgba(64, 78, 107, 0.3);
+}
+
+option {
+    background: #e4ebf2;
+    color: #404e6b;
+}
+
+
+/* Responsive */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 30px 20px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="password"] {
+        padding: 10px 12px;
+    }
+}

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            
+  
+  
+  
+  <modelVersion>4.0.0</modelVersion>
+            
+  
+  
+  
+  <groupId>com.apri</groupId>
+            
+  
+  
+  
+  <artifactId>micro-apri</artifactId>
+            
+  
+  
+  
+  <version>1.0-SNAPSHOT</version>
+            
+  
+  
+  
+  <packaging>pom</packaging>
+            
+  
+  
+  
+  <modules>
+              
+    
+    
+    <module>ms-web</module>
+              
+    
+    
+    <module>ms-user</module>
+          
+    
+    <module>ms-MatEducativo</module>
+      
+  </modules>
+            
+  
+    
+  
+  <properties>
+                
+    
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+         
+        
+    
+    <maven.compiler.source>17</maven.compiler.source>
+         
+        
+    
+    <maven.compiler.target>17</maven.compiler.target>
+         
+        
+    
+    <jakartaee.version>10.0.0</jakartaee.version>
+         
+        
+    
+    <gson.version>2.10.1</gson.version>
+         
+        
+    
+    <postgresql.version>42.7.7</postgresql.version>
+         
+        
+    
+    <jbcrypt.version>0.4</jbcrypt.version>
+         
+    
+  
+  </properties>
+     
+    
+  
+  <dependencyManagement>
+         
+        
+    
+    <dependencies>
+             
+            
+      
+      <dependency>
+                 
+                
+        
+        <groupId>jakarta.platform</groupId>
+                 
+                
+        
+        <artifactId>jakarta.jakartaee-api</artifactId>
+                 
+                
+        
+        <version>${jakartaee.version}</version>
+                 
+                
+        
+        <scope>provided</scope>
+                 
+            
+      
+      </dependency>
+             
+            
+      
+      <dependency>
+                 
+                
+        
+        <groupId>com.google.code.gson</groupId>
+                 
+                
+        
+        <artifactId>gson</artifactId>
+                 
+                
+        
+        <version>${gson.version}</version>
+                 
+            
+      
+      </dependency>
+             
+            
+      
+      <dependency>
+                 
+                
+        
+        <groupId>org.mindrot</groupId>
+                 
+                
+        
+        <artifactId>jbcrypt</artifactId>
+                 
+                
+        
+        <version>${jbcrypt.version}</version>
+                 
+            
+      
+      </dependency>
+             
+            
+      
+      <dependency>
+                 
+                
+        
+        <groupId>org.postgresql</groupId>
+                 
+                
+        
+        <artifactId>postgresql</artifactId>
+                 
+                
+        
+        <version>${postgresql.version}</version>
+                 
+            
+      
+      </dependency>
+             
+            
+      
+      <dependency>
+                 
+                
+        
+        <groupId>ListCircular-Apri</groupId>
+                 
+                
+        
+        <artifactId>ListApri</artifactId>
+                 
+                
+        
+        <version>1.0</version>
+                 
+            
+      
+      </dependency>
+             
+        
+    
+    </dependencies>
+         
+    
+  
+  </dependencyManagement>
+     
+     
+    
+   
+
+
+
+</project>
