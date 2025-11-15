@@ -77,7 +77,7 @@
                     <div class="stat-card">
                         <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
                         <div class="stat-info">
-                            <h3>Total Usuarios</h3>
+                            <h3>Total Usuarios </h3>
                             <p><%=listaU.size()%></p>
                         </div>
                     </div>

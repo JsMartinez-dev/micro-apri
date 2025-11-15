@@ -41,7 +41,9 @@
           
     
     <module>ms-MatEducativo</module>
-      
+    <module>../../../Desktop/micro-apri-main/micro-apri-main/Ms-pQrs</module>
+    <module>../../../Desktop/micro-apri-main/micro-apri-main/ms-reportes</module>
+    <module>../../../Desktop/micro-apri-main/micro-apri-main/ms-resena</module>
   </modules>
             
   
