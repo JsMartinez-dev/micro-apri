@@ -15,6 +15,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración</title>
     <link rel="stylesheet" href="css/styleDashboardAdmin.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+      integrity="sha512-SnH5WK+bZxgIk9lKMdQXWf5fL8pT..." 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body>
@@ -72,21 +75,21 @@
             <div id="usuarios-section" class="content-section">
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon blue">👥</div>
+                        <div class="stat-icon blue"><i class="fa-solid fa-users"></i></div>
                         <div class="stat-info">
                             <h3>Total Usuarios</h3>
                             <p><%=listaU.size()%></p>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon green">✓</div>
+                        <div class="stat-icon green"><i class="fa-solid fa-check"></i></div>
                         <div class="stat-info">
                             <h3>Usuarios Activos</h3>
                             <p><%=n%></p>
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon red">✗</div>
+                        <div class="stat-icon red"><i class="fa-solid fa-x"></i></div>
                         <div class="stat-info">
                             <h3>Usuarios Inactivos</h3>
                             <p><%=listaU.size()-n%></p>

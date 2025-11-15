@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+       integrity="sha512-SnH5WK+bZxgIk9lKMdQXWf5fL8pT..." 
+       crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
         
@@ -47,14 +50,14 @@
             <main class="main-content">
                 <header class="header">
                 <div class="welcome-text">
-                        <h1>Registrar libro</h1>
+                        <h1>Registrar libro <i class="fa-solid fa-book-bookmark"></i></h1>
                         <p>Comparte tu libro con la comunidad</p>
                     </div>
                     <div class="header-right">
                         <a href="ElegirMaterial.jsp" 
                            class="add-cancel-btn" 
                            style="text-decoration: none;">
-                            ← Cancelar
+                           <i class="fa-solid fa-left-long"></i> Cancelar
                         </a>
                     </div>
                 </header>

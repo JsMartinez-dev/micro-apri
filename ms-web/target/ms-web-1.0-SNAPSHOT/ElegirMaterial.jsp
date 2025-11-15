@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+       integrity="sha512-SnH5WK+bZxgIk9lKMdQXWf5fL8pT..." 
+       crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <%
@@ -51,7 +54,7 @@
                     <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=dashboardUser" 
                        class="add-cancel-btn" 
                        style="text-decoration: none;">
-                        ← Cancelar
+                       <i class="fa-solid fa-left-long"></i> Cancelar
                     </a>
                 </div>
             </header>
@@ -62,7 +65,7 @@
 
             <div class="upload-options">
                 <div class="upload-card">
-                    <div class="upload-icon">📖</div>
+                    <div class="upload-icon"><i class="fa-solid fa-book-bookmark"></i></div>
                     <h2>Libro</h2>
                     <p class="upload-desc">
                         Comparte un libro para ayudar a los demás a aprender.
@@ -75,7 +78,7 @@
                 </div>
 
                 <div class="upload-card">
-                    <div class="upload-icon">📝</div>
+                    <div class="upload-icon"><i class="fa-solid fa-newspaper"></i></div>
                     <h2>Artículo</h2>
                     <p class="upload-desc">
                         Publica un artículo para compartir tus ideas y experiencias.
@@ -88,7 +91,7 @@
                 </div>
 
                 <div class="upload-card">
-                    <div class="upload-icon">🎓</div>
+                    <div class="upload-icon"><i class="fa-solid fa-graduation-cap"></i></div>
                     <h2>Curso</h2>
                     <p class="upload-desc">
                         Crea un curso completo y enseña a otros paso a paso.

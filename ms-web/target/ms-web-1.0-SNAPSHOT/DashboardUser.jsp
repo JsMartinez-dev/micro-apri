@@ -20,6 +20,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+       integrity="sha512-SnH5WK+bZxgIk9lKMdQXWf5fL8pT..." 
+       crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
     <body>
@@ -85,7 +88,7 @@
                     </div>
                     <div class="header-right">
                         <form action="ElegirMaterial.jsp">
-                        <button class="add-resource-btn">+ Agregar Recurso Educativo</button>
+                        <button class="add-resource-btn"><i class="fa-solid fa-circle-plus"></i> Agregar Recurso Educativo</button>
                         </form>
                         
                     </div>
@@ -94,7 +97,7 @@
        
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-icon red">📖</div>
+                        <div class="stat-icon red"><i class="fa-solid fa-book-bookmark"></i></div>
                         <div class="stat-info">
                             <h3>Tus libros</h3>
                             <p><%=cantLibros%></p>
@@ -102,7 +105,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon blue">📝</div>
+                        <div class="stat-icon blue"><i class="fa-solid fa-newspaper"></i></div>
                         <div class="stat-info">
                             <h3>Tus artículos</h3>
                             <p><%=cantArticulos%></p>
@@ -110,7 +113,7 @@
                         </div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-icon yellow">🎓</div>
+                        <div class="stat-icon yellow"><i class="fa-solid fa-graduation-cap"></i></div>
                         <div class="stat-info">
                             <h3>Tus cursos</h3>
                             <p><%=cantCursos%></p>

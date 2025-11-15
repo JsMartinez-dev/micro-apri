@@ -16,6 +16,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración-Gestion usuarios</title>
     <link rel="stylesheet" href="css/styleDashboardAdmin.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+      integrity="sha512-SnH5WK+bZxgIk9lKMdQXWf5fL8pT..." 
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 </head>
 <body>
@@ -63,25 +67,25 @@
                     </div>
                 </header>
                 <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=dashboardAdmin" class="btn-salir">
-                    ← Volver al Dashboard
+                    <i class="fa-solid fa-left-long"></i> Regresar
                 </a>
             </div>
 
             <!-- Mensaje de éxito -->
             <% if(success != null && success.equals("eliminado")){ %>
                 <div class="alert alert-success">
-                    ✓ Usuario eliminado exitosamente
+                    <i class="fa-regular fa-circle-check"></i> Usuario eliminado exitosamente
                 </div>
             <% } %>
 
             <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Buscar por nombre...">
-                <button class="search-btn">🔍</button>
+                <input type="text" class="search-input" placeholder="Buscar por nombre">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
 
             <div class="table-container">
                 <div class="table-header">
-                    <h2 class="table-title">Lista de Usuarios</h2>
+                    <h2 class="table-title">Lista de Usuarios <i class="fa-solid fa-users"></i></h2>
                     <span class="table-info">Mostrando <%=listaUsuarios.size()%> usuarios</span>
                 </div>
                 <table>
@@ -110,7 +114,7 @@
                                 <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=eliminarUsuario&id=<%=user.id_persona()%>" 
                                    class="action-btn delete-btn" 
                                    onclick="return confirm('¿Estás seguro de eliminar este usuario?')">
-                                   🗑️ Eliminar
+                                  <i class="fa-solid fa-trash"></i> Eliminar
                                 </a>
                             </td>
                         </tr>
