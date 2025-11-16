@@ -19,6 +19,7 @@ integracion\MatEducativoClienteHttp.class
 servicio\LoginServicio.class
 modelo\ComentarioPQRs.class
 dto\DtoAdminLogin.class
+integracion\MatEducativoClienteHttp$2.class
 persistencia\DaoUsuarioImpPostgres.class
 modelo\Descarga.class
 modelo\PQRs.class

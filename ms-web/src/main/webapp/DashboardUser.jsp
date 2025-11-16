@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="utilidad.Ruta"%>
 <%@page import="com.google.gson.Gson"%>
 <%@page import="com.google.gson.reflect.TypeToken"%>
@@ -69,8 +70,7 @@
                 <nav>
                     <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=dashboardUser"  class="menu-item active">Dashboard</a>
                     <div class="menu-item">Mi aprendizaje</div>
-                    <a href="<%=Ruta.MS_MATEDU_URL%>/LibroControll?accion=matEducativos&user=<%=usuarioJson%>"  class="menu-item ">Material educativo disponible</a>
-                    <a href="MiPerfil.jsp"  class="menu-item ">Mi perfil</a>
+                    <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=matEducativos"  class="menu-item ">Material educativo disponible</a>                    <a href="MiPerfil.jsp"  class="menu-item ">Mi perfil</a>
                     <a href="<%=Ruta.MS_USUARIO_URL%>/CerrarSesion?accion=user" class="menu-item ">Cerrar sesión</a>
   
                 </nav>

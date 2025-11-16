@@ -280,9 +280,6 @@
                 </div>
                 <nav>
                     <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=dashboardUser" class="menu-item">Dashboard</a>
-                    <div class="menu-item">Mi aprendizaje</div>
-                    <div class="menu-item">Material educativo disponible</div>
-                    <div class="menu-item active">Mi perfil</div>
                     <a href="<%=Ruta.MS_USUARIO_URL%>/CerrarSesion?accion=user" class="menu-item">Cerrar sesión</a>
                 </nav>
             </aside>

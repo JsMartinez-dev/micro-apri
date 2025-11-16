@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.logging.Level;
@@ -64,6 +65,7 @@ import utilidad.Ruta;
             case "dashboardUser" -> dashboardUser(request,response);
             case "dashboardAdmin" -> dashboardAdmin(request,response);
             case "gestionUsuario" -> gestionUsuarios(request,response);
+            case "matEducativos" -> listarMaterialesEducativos(request,response);
             case "eliminarUsuario"->{
                 int id_user = Integer.parseInt(request.getParameter("id"));
                 eliminarUser(request,response,id_user);
@@ -201,6 +203,75 @@ import utilidad.Ruta;
         
     }
 
+   private void listarMaterialesEducativos(HttpServletRequest request, HttpServletResponse response) {
+    
+    HttpSession miSesion = request.getSession(false);
+    
+    // Validar sesión
+    if(miSesion == null || miSesion.getAttribute("usuario") == null){
+        try {
+            response.sendRedirect(Ruta.MS_WEB + "/InicioSesionUsuario.jsp?error=sesionExpirada");
+            return; // IMPORTANTE: detener ejecución
+        } catch (IOException ex) {
+            System.err.println("Error al redirigir: " + ex.getMessage());
+            return;
+        }
+    }
+    
+    DtoUsuarioLogin dtoUser = (DtoUsuarioLogin) miSesion.getAttribute("usuario");
+    System.out.println("DTO desde el UsuarioControl: " + dtoUser);
+    
+    try {
+        // Obtener lista de materiales
+        List<DtoMatEducativo> listMat = matEduCliente.listarMateriales();  
+        System.out.println("Lista de materiales desde Usuario controll: " + listMat);
+        
+        if(listMat != null && !listMat.isEmpty()) {
+            System.out.println("Materiales encontrados: " + listMat.size());
+            
+            // Convertir a JSON
+            String jsonUsuario = gson.toJson(dtoUser);
+            String jsonLista = gson.toJson(listMat);
+            
+            // Construir URL con parámetros codificados
+            String url = Ruta.MS_WEB + "/ExplorarMateriales.jsp" + 
+                        "?usuario=" + URLEncoder.encode(jsonUsuario, "UTF-8") +
+                        "&lista=" + URLEncoder.encode(jsonLista, "UTF-8");
+            
+            response.sendRedirect(url);
+            
+        } else {
+            System.out.println("No se encontraron materiales o la lista está vacía");
+            // Redirigir con mensaje de error
+            response.sendRedirect(Ruta.MS_WEB + "/DashboardUser.jsp?error=noMateriales");
+        }
+        
+    } catch (UnsupportedEncodingException ex) {
+        System.err.println("Error de codificación: " + ex.getMessage());
+        ex.printStackTrace();
+        try {
+            response.sendRedirect(Ruta.MS_WEB + "/DashboardUser.jsp?error=codificacion");
+        } catch (IOException e) {
+            System.err.println("Error al redirigir después de error de codificación: " + e.getMessage());
+        }
+    } catch (IOException ex) {
+        System.err.println("Error de IO: " + ex.getMessage());
+        ex.printStackTrace();
+        try {
+            response.sendRedirect(Ruta.MS_WEB + "/DashboardUser.jsp?error=conexion");
+        } catch (IOException e) {
+            System.err.println("Error al redirigir después de error de IO: " + e.getMessage());
+        }
+    } catch (Exception ex) {
+        System.err.println("Error general: " + ex.getMessage());
+        ex.printStackTrace();
+        try {
+            response.sendRedirect(Ruta.MS_WEB + "/DashboardUser.jsp?error=general");
+        } catch (IOException e) {
+            System.err.println("Error al redirigir después de error general: " + e.getMessage());
+        }
+    }
+    }
 
 
 }

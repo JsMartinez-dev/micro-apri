@@ -51,9 +51,7 @@ public class LibroControll extends HttpServlet {
         switch (accion) {
             case "buscarMaterialPorUsuario" -> buscarMaterialPorUsuarioJSON(request, response);
             case "matEducativos" -> {
-                String usuarioJson = request.getParameter("user");
-                System.out.println("Usuario: "+usuarioJson);
-                listarMateriales(request,response,usuarioJson);
+                listarMateriales(request,response);
             }
             default -> response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción no válida");
         }
@@ -141,7 +139,7 @@ public class LibroControll extends HttpServlet {
     public String getServletInfo() {
         return "Controlador de Libros con soporte JSON";
     }
-   private void listarMateriales(HttpServletRequest request, HttpServletResponse response, String usuarioJson) {
+   private void listarMateriales(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
@@ -150,38 +148,30 @@ public class LibroControll extends HttpServlet {
 
             System.out.println("Lista de materiales obtenida: " + (listaMateriales != null ? listaMateriales.size() : "null"));
 
-            if (listaMateriales == null || listaMateriales.isEmpty()) {
-                response.setStatus(HttpServletResponse.SC_OK); // Cambiar a OK y enviar array vacío
+            System.out.println("Lista de materialitos: "+listaMateriales);
+            if (listaMateriales != null) {
+                String jsonResponse = gson.toJson(listaMateriales);
+                
                 try (PrintWriter out = response.getWriter()) {
-                    out.print("[]"); // Array vacío en JSON
-                    out.flush();
+                    out.print(jsonResponse);
+                    out.flush(); 
                 }
-                return;
+                
+                System.out.println("Material educativo enviado como JSONNNNNNNNNNNNN: ");
+            } else {
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                enviarError(response, "No se encontraron materiales para el usuario");
             }
-
-            String listaJson = gson.toJson(listaMateriales);
-            System.out.println("JSON generado: " +listaJson);
-            
-            String url = Ruta.MS_WEB+"/ExplorarMateriales?usuario="+
-                    URLEncoder.encode(usuarioJson, "UTF-8")
-                    +"&lista="+URLEncoder.encode(listaJson,"UTF-8");
-
-            response.sendRedirect(url);
-
-            System.out.println("Materiales enviados exitosamente");
 
         } catch (IOException ex) {
             System.err.println("Error de IO en listarMateriales: " + ex.getMessage());
-            ex.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             try {
                 enviarError(response, "Error al procesar la solicitud: " + ex.getMessage());
             } catch (IOException e) {
-                e.printStackTrace();
             }
         } catch (Exception ex) {
             System.err.println("Error general en listarMateriales: " + ex.getMessage());
-            ex.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             try {
                 enviarError(response, "Error interno del servidor");
