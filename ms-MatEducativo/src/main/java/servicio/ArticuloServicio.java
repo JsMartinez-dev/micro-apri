@@ -5,17 +5,19 @@ import dto.DtoArticuloRegistro;
 import java.io.InputStream;
 import persistencia.ApriException;
 import persistencia.DaoArticulo;
-import persistencia.DaoArticuloImpPostgres;
 import modelo.Articulo;
+import persistencia.FabConexion;
 
 
 public class ArticuloServicio {
     
     DaoArticulo daoArticulo;
+    FabConexion fab;
     
     
     public ArticuloServicio(){
-        daoArticulo = new DaoArticuloImpPostgres();
+        fab = new  FabConexion();
+        daoArticulo = fab.getConexionBD("POSTGRES");
     }
     
     

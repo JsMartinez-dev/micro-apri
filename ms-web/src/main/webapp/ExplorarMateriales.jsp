@@ -391,9 +391,7 @@
                             </td>
                             <td class="descripcion-cell"><%=libro.descripcion()%></td>
                             <td>
-                                <a href="#" class="action-btn view-btn">
-                                    <i class="fa-solid fa-eye"></i> Ver
-                                </a>
+
                                 <a href="#" class="action-btn download-btn">
                                     <i class="fa-solid fa-download"></i> Descargar
                                 </a>

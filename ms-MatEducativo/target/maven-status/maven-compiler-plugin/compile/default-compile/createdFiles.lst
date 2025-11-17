@@ -10,6 +10,7 @@ modelo\Libro.class
 persistencia\DaoLibro.class
 persistencia\DaoModuloImpPostgres1.class
 persistencia\DaoCurso.class
+persistencia\DaoArticuloImpMongo.class
 servicio\CursoServicio.class
 modelo\Curso.class
 modelo\Modulo.class
@@ -33,6 +34,7 @@ dto\DtoLeccionLista.class
 modelo\MaterialEducativo.class
 servicio\LibroServicio.class
 presentacion\LibroControll$ErrorResponse.class
+persistencia\FabConexion.class
 modelo\Articulo.class
 persistencia\ConexionBD.class
 persistencia\DaoArticulo.class

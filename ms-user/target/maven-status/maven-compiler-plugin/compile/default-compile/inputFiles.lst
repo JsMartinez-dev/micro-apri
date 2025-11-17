@@ -12,7 +12,9 @@ C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\sr
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\src\main\java\persistencia\ApriException.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\src\main\java\persistencia\ConexionBD.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\src\main\java\persistencia\DaoUsuario.java
+C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\src\main\java\persistencia\DaoUsuarioImpMongo.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\src\main\java\persistencia\DaoUsuarioImpPostgres.java
+C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\src\main\java\persistencia\FabConexion.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\src\main\java\presentacion\CerrarSesionControll.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\src\main\java\presentacion\LoginControll.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-user\src\main\java\presentacion\RegistroControll.java

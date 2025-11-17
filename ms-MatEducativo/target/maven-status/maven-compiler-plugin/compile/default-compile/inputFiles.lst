@@ -16,6 +16,7 @@ C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEduc
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\ApriException.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\ConexionBD.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\DaoArticulo.java
+C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\DaoArticuloImpMongo.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\DaoArticuloImpPostgres.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\DaoCurso.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\DaoCursoImpPostgres.java
@@ -25,6 +26,7 @@ C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEduc
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\DaoLibroImp.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\DaoModulo.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\DaoModuloImpPostgres1.java
+C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\persistencia\FabConexion.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\presentacion\ArticuloControll.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\presentacion\CursoControll.java
 C:\Users\ACER-A315-59\OneDrive\Documentos\NetBeansProjects\micro-apri\ms-MatEducativo\src\main\java\presentacion\LeccionControll.java

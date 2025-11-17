@@ -10,7 +10,7 @@ import java.util.List;
 
 import modelo.Usuario;
 import persistencia.DaoUsuario;
-import persistencia.DaoUsuarioImpPostgres;
+import persistencia.FabConexion;
 
 /**
  *
@@ -19,9 +19,11 @@ import persistencia.DaoUsuarioImpPostgres;
 public class UsuarioServicio {
     
     DaoUsuario daoUser;
+    FabConexion fabrica;
     
     public UsuarioServicio(){
-        daoUser = new DaoUsuarioImpPostgres();
+        fabrica = new FabConexion();
+        daoUser = fabrica.getConexionBD("POSTGRES");
     }
     
     public List<DtoUsuarioLogin> listUser() throws Exception{
