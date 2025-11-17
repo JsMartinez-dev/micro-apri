@@ -312,7 +312,6 @@
         sesion.setAttribute("usuario", dtoUser);
         sesion.setAttribute("listaMat", listaMat);
         
-        // Separar materiales por tipo
         List<DtoMatEducativo> libros = new ArrayList<>();
         List<DtoMatEducativo> articulos = new ArrayList<>();
         List<DtoMatEducativo> cursos = new ArrayList<>();
@@ -329,13 +328,11 @@
     %>
     
     <div class="explorar-container">
-        <!-- Header de la página -->
         <div class="page-header">
             <h1><i class="fa-solid fa-book-open"></i> Explorar Materiales Educativos</h1>
             <p>Descubre y gestiona todos los recursos disponibles en la plataforma</p>
         </div>
         
-        <!-- Tarjetas de estadísticas -->
         <div class="stats-cards">
             <div class="stat-card libros">
                 <i class="fa-solid fa-book-bookmark"></i>
@@ -354,7 +351,6 @@
             </div>
         </div>
         
-        <!-- TABLA DE LIBROS -->
         <div class="table-section">
             <div class="table-header">
                 <h2 class="table-title libros">
@@ -409,7 +405,6 @@
             <% } %>
         </div>
         
-        <!-- TABLA DE ARTÍCULOS -->
         <div class="table-section">
             <div class="table-header">
                 <h2 class="table-title articulos">
@@ -464,7 +459,6 @@
             <% } %>
         </div>
         
-        <!-- TABLA DE CURSOS -->
         <div class="table-section">
             <div class="table-header">
                 <h2 class="table-title cursos">
@@ -507,9 +501,6 @@
                             <td>
                                 <a href="#" class="action-btn view-btn">
                                     <i class="fa-solid fa-eye"></i> Ver
-                                </a>
-                                <a href="#" class="action-btn download-btn">
-                                    <i class="fa-solid fa-download"></i> Descargar
                                 </a>
                             </td>
                         </tr>

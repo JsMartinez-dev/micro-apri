@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import servicio.CursoServicio;
 import utilidad.Ruta;
 
@@ -32,11 +33,44 @@ public class CursoControll extends HttpServlet {
     }
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-      
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    
+    String accion = request.getParameter("accion");
+    
+    if (accion != null && accion.equals("eliminar")) {
+        eliminarCurso(request, response);
+    } else {
+        response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Acción no válida");
     }
+}
+
+private void eliminarCurso(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    try {
+        String idMatStr = request.getParameter("id");
+        
+        if (idMatStr == null || idMatStr.isEmpty()) {
+            response.sendRedirect(Ruta.MS_WEB + "/DashboardUser.jsp?error=ID no proporcionado");
+            return;
+        }
+        
+        int idMaterial = Integer.parseInt(idMatStr);
+        
+        boolean eliminado = cursoServicio.eliminarCurso(idMaterial);
+        
+        if (eliminado) {
+            System.out.println("Curso eliminado exitosamente con ID: " + idMaterial);
+            response.sendRedirect(Ruta.MS_USUARIO_URL + "/UsuarioControll?accion=dashboardUser");
+        } else {
+            response.sendRedirect(Ruta.MS_WEB + "/DashboardUser.jsp?error=No se pudo eliminar el curso");
+        }
+        
+    } catch (NumberFormatException e) {
+        response.sendRedirect(Ruta.MS_WEB + "/DashboardUser.jsp?error=ID inválido");
+    } catch (Exception e) {
+        response.sendRedirect(Ruta.MS_WEB + "/DashboardUser.jsp?error=Error al eliminar: " + e.getMessage());
+    }
+}
 
     
     @Override
@@ -52,6 +86,7 @@ public class CursoControll extends HttpServlet {
         
         switch (accion) {
             case "register" -> registrarCurso(request,response);
+            case "eliminar" -> eliminarCurso(request, response);
             default -> throw new AssertionError();
         }
        
@@ -111,3 +146,4 @@ public class CursoControll extends HttpServlet {
 
   
 }
+

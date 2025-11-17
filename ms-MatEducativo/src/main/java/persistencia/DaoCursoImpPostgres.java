@@ -63,10 +63,23 @@ public class DaoCursoImpPostgres implements DaoCurso{
     }
 
     @Override
-    public boolean eliminar(Curso libro) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean eliminar(Curso curso) throws Exception {
+    String sql = "UPDATE cursos SET estado = FALSE WHERE id_material_educativo = ?";
+    
+    try(Connection conn = ConexionBD.getInstancia().getConexion();
+        PreparedStatement stmt = conn.prepareStatement(sql)){
+        
+        stmt.setInt(1, curso.getId_materialEducativo());
+        
+        int filasAfectadas = stmt.executeUpdate();
+        System.out.println("Curso eliminado (soft delete), filas afectadas: " + filasAfectadas);
+        
+        return filasAfectadas > 0;
+        
+    } catch (SQLException ex) {
+        throw new ApriException("Error al eliminar el curso: " + ex.getMessage());
     }
-
+}
     @Override
     public List<Curso> listar() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
