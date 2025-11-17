@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microservicio de Reseñas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        .status {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+        .status.loading {
+            background: #fff3e0;
+            border-left-color: #ff9800;
+        }
+        .status.error {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+        .endpoints {
+            margin-top: 30px;
+        }
+        .endpoint {
+            background: #f5f5f5;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .endpoint-method {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.85em;
+            margin-right: 10px;
+        }
+        .get { background: #4caf50; color: white; }
+        .post { background: #2196f3; color: white; }
+        .put { background: #ff9800; color: white; }
+        .delete { background: #f44336; color: white; }
+        .endpoint-path {
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+        .endpoint-desc {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        .section-title {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+        .health-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .health-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .health-card-title {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .health-card-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+        .health-card-value.ok { color: #4caf50; }
+        .health-card-value.error { color: #f44336; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MS-Reseñas</h1>
+        <p class="subtitle">Microservicio de Gestión de Reseñas, Reportes y Sanciones</p>
+        
+        <div id="status" class="status loading">
+            <strong>Estado:</strong> Verificando conexión...
+        </div>
+
+        <div id="healthInfo" class="health-info" style="display: none;"></div>
+
+        <h2 class="section-title">Endpoints Disponibles</h2>
+
+        <h3 style="color: #555; margin-top: 20px;">Reseñas</h3>
+        <div class="endpoint">
+            <span class="endpoint-method get">GET</span>
+            <span class="endpoint-path">/resena/material/{id}</span>
+            <div class="endpoint-desc">Obtener reseñas de un material educativo</div>
+        </div>
+        <div class="endpoint">
+            <span class="endpoint-method get">GET</span>
+            <span class="endpoint-path">/resena/{id}</span>
+            <div class="endpoint-desc">Obtener una reseña por ID</div>
+        </div>
+        <div class="endpoint">
+            <span class="endpoint-method post">POST</span>
+            <span class="endpoint-path">/resena</span>
+            <div class="endpoint-desc">Crear una nueva reseña</div>
+        </div>
+        <div class="endpoint">
+            <span class="endpoint-method put">PUT</span>
+            <span class="endpoint-path">/resena/{id}</span>
+            <div class="endpoint-desc">Actualizar una reseña</div>
+        </div>
+        <div class="endpoint">
+            <span class="endpoint-method delete">DELETE</span>
+            <span class="endpoint-path">/resena/{id}</span>
+            <div class="endpoint-desc">Eliminar una reseña</div>
+        </div>
+
+        <h3 style="color: #555; margin-top: 20px;">Reportes</h3>
+        <div class="endpoint">
+            <span class="endpoint-method get">GET</span>
+            <span class="endpoint-path">/reporte</span>
+            <div class="endpoint-desc">Obtener todos los reportes</div>
+        </div>
+        <div class="endpoint">
+            <span class="endpoint-method post">POST</span>
+            <span class="endpoint-path">/reporte</span>
+            <div class="endpoint-desc">Crear un nuevo reporte</div>
+        </div>
+        <div class="endpoint">
+            <span class="endpoint-method post">POST</span>
+            <span class="endpoint-path">/reporte/respuesta</span>
+            <div class="endpoint-desc">Responder a un reporte</div>
+        </div>
+
+        <h3 style="color: #555; margin-top: 20px;">Sanciones</h3>
+        <div class="endpoint">
+            <span class="endpoint-method post">POST</span>
+            <span class="endpoint-path">/sancion/advertir</span>
+            <div class="endpoint-desc">Crear advertencia a usuario</div>
+        </div>
+        <div class="endpoint">
+            <span class="endpoint-method post">POST</span>
+            <span class="endpoint-path">/sancion/suspender</span>
+            <div class="endpoint-desc">Suspender usuario temporalmente</div>
+        </div>
+        <div class="endpoint">
+            <span class="endpoint-method post">POST</span>
+            <span class="endpoint-path">/sancion/banear</span>
+            <div class="endpoint-desc">Banear usuario permanentemente</div>
+        </div>
+        <div class="endpoint">
+            <span class="endpoint-method get">GET</span>
+            <span class="endpoint-path">/sancion/verificar/{idUsuario}</span>
+            <div class="endpoint-desc">Verificar estado de acceso de un usuario</div>
+        </div>
+    </div>
+
+    <script>
+        // Verificar el estado del servicio
+        fetch('/ms-resenas/health')
+            .then(response => response.json())
+            .then(data => {
+                const statusDiv = document.getElementById('status');
+                const healthInfoDiv = document.getElementById('healthInfo');
+                
+                if (data.status === 'UP') {
+                    statusDiv.className = 'status';
+                    statusDiv.innerHTML = '<strong>Estado:</strong> Servicio activo y funcionando';
+                    
+                    healthInfoDiv.style.display = 'grid';
+                    healthInfoDiv.innerHTML = `
+                        <div class="health-card">
+                            <div class="health-card-title">Estado</div>
+                            <div class="health-card-value ok">${data.status}</div>
+                        </div>
+                        <div class="health-card">
+                            <div class="health-card-title">Base de Datos</div>
+                            <div class="health-card-value ok">${data.database}</div>
+                        </div>
+                        <div class="health-card">
+                            <div class="health-card-title">Versión</div>
+                            <div class="health-card-value">${data.version}</div>
+                        </div>
+                        <div class="health-card">
+                            <div class="health-card-title">Servicio</div>
+                            <div class="health-card-value">${data.service}</div>
+                        </div>
+                    `;
+                } else {
+                    statusDiv.className = 'status error';
+                    statusDiv.innerHTML = '<strong>Estado:</strong> Servicio con problemas - ' + data.database;
+                }
+            })
+            .catch(error => {
+                const statusDiv = document.getElementById('status');
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '<strong>Estado:</strong> Error al verificar el servicio';
+            });
+    </script>
+</body>
+</html>
