@@ -176,17 +176,31 @@ public class ResenaControlServlet extends HttpServlet {
 
         int statusCode = conn.getResponseCode();
 
+        boolean ajax = "true".equalsIgnoreCase(request.getParameter("ajax"))
+                || "XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"));
+
         if (statusCode == HttpServletResponse.SC_OK) {
-            String redirectUrl = request.getParameter("redirectUrl");
-            if (redirectUrl != null && !redirectUrl.isEmpty()) {
-                String sep = redirectUrl.contains("?") ? "&" : "?";
-                response.sendRedirect(redirectUrl + sep + "success=resena_actualizada");
+            if (ajax) {
+                response.setContentType("application/json; charset=UTF-8");
+                response.getWriter().write("{\"success\":true,\"mensaje\":\"Reseña actualizada correctamente\"}");
             } else {
-                response.sendRedirect("DashboardUser.jsp?success=resena_actualizada");
+                String redirectUrl = request.getParameter("redirectUrl");
+                if (redirectUrl != null && !redirectUrl.isEmpty()) {
+                    String sep = redirectUrl.contains("?") ? "&" : "?";
+                    response.sendRedirect(redirectUrl + sep + "success=resena_actualizada");
+                } else {
+                    response.sendRedirect("DashboardUser.jsp?success=resena_actualizada");
+                }
             }
         } else {
             String errorMsg = leerRespuesta(conn);
-            response.sendError(statusCode, "Error al actualizar reseña: " + errorMsg);
+            if (ajax) {
+                response.setContentType("application/json; charset=UTF-8");
+                response.setStatus(statusCode);
+                response.getWriter().write("{\"success\":false,\"error\":\"" + errorMsg.replace("\"", "\\\"") + "\"}");
+            } else {
+                response.sendError(statusCode, "Error al actualizar reseña: " + errorMsg);
+            }
         }
     }
 
@@ -209,17 +223,31 @@ public class ResenaControlServlet extends HttpServlet {
 
         int statusCode = conn.getResponseCode();
 
+        boolean ajax = "true".equalsIgnoreCase(request.getParameter("ajax"))
+                || "XMLHttpRequest".equalsIgnoreCase(request.getHeader("X-Requested-With"));
+
         if (statusCode == HttpServletResponse.SC_OK) {
-            String redirectUrl = request.getParameter("redirectUrl");
-            if (redirectUrl != null && !redirectUrl.isEmpty()) {
-                String sep = redirectUrl.contains("?") ? "&" : "?";
-                response.sendRedirect(redirectUrl + sep + "success=resena_eliminada");
+            if (ajax) {
+                response.setContentType("application/json; charset=UTF-8");
+                response.getWriter().write("{\"success\":true,\"mensaje\":\"Reseña eliminada correctamente\"}");
             } else {
-                response.sendRedirect("DashboardUser.jsp?success=resena_eliminada");
+                String redirectUrl = request.getParameter("redirectUrl");
+                if (redirectUrl != null && !redirectUrl.isEmpty()) {
+                    String sep = redirectUrl.contains("?") ? "&" : "?";
+                    response.sendRedirect(redirectUrl + sep + "success=resena_eliminada");
+                } else {
+                    response.sendRedirect("DashboardUser.jsp?success=resena_eliminada");
+                }
             }
         } else {
             String errorMsg = leerRespuesta(conn);
-            response.sendError(statusCode, "Error al eliminar reseña: " + errorMsg);
+            if (ajax) {
+                response.setContentType("application/json; charset=UTF-8");
+                response.setStatus(statusCode);
+                response.getWriter().write("{\"success\":false,\"error\":\"" + errorMsg.replace("\"", "\\\"") + "\"}");
+            } else {
+                response.sendError(statusCode, "Error al eliminar reseña: " + errorMsg);
+            }
         }
     }
 

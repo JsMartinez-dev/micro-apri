@@ -180,7 +180,10 @@
                         const estrellas = '<i class="fas fa-star"></i> '.repeat(resena.cantidadEstrellas);
                         const esPropia = resena.idUsuario == idUsuario;
                         const botonesHtml = esPropia
-                            ? '<div class="resena-acciones"><button onclick="eliminarResena(' + resena.idResena + ')" class="btn-small btn-delete"><i class="fas fa-trash"></i> Eliminar</button></div>'
+                            ? '<div class="resena-acciones">'
+                                + '<button onclick="editarResena(' + resena.idResena + ',\'' + encodeURIComponent(resena.comentario) + '\',' + resena.cantidadEstrellas + ')" class="btn-small"><i class="fas fa-pen"></i> Editar</button>'
+                                + '<button onclick="eliminarResena(' + resena.idResena + ')" class="btn-small btn-delete"><i class="fas fa-trash"></i> Eliminar</button>'
+                              + '</div>'
                             : '<div class="resena-acciones"><button onclick="reportarResena(' + resena.idResena + ')" class="btn-small btn-report"><i class="fas fa-flag"></i> Reportar</button></div>';
                         html += '<div class="resena-card">' +
                                 '<div class="resena-header">' +
@@ -233,36 +236,70 @@
             }
         }
 
-        function eliminarResena(idResena) {
-            Swal.fire({ title: '¿Estás seguro?', text: 'Esta acción no se puede deshacer', icon: 'warning', showCancelButton: true, confirmButtonColor: '#dc3545', cancelButtonColor: '#6c757d', confirmButtonText: 'Sí, eliminar', cancelButtonText: 'Cancelar' })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        const form = document.createElement('form');
-                        form.method = 'POST';
-                        form.action = 'ResenaControl';
+        async function eliminarResena(idResena) {
+            const confirm = await Swal.fire({ title: '¿Estás seguro?', text: 'Esta acción no se puede deshacer', icon: 'warning', showCancelButton: true, confirmButtonColor: '#dc3545', cancelButtonColor: '#6c757d', confirmButtonText: 'Sí, eliminar', cancelButtonText: 'Cancelar' });
+            if (!confirm.isConfirmed) return;
 
-                        const accion = document.createElement('input');
-                        accion.type = 'hidden';
-                        accion.name = 'accion';
-                        accion.value = 'eliminar';
-                        form.appendChild(accion);
+            try {
+                const params = new URLSearchParams();
+                params.append('accion', 'eliminar');
+                params.append('idResena', idResena);
+                params.append('ajax', 'true');
+                const resp = await fetch('ResenaControl', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }, body: params });
+                const data = await resp.json();
+                if (resp.ok && data.success) {
+                    await Swal.fire({ title: 'Eliminada', text: 'Reseña eliminada correctamente', icon: 'success', confirmButtonText: 'Aceptar', confirmButtonColor: '#405370' });
+                    await cargarPromedio();
+                    await cargarResenas();
+                } else {
+                    throw new Error(data.error || 'No se pudo eliminar la reseña');
+                }
+            } catch (e) {
+                Swal.fire({ title: 'Error', text: String(e.message || e), icon: 'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#405370' });
+            }
+        }
 
-                        const id = document.createElement('input');
-                        id.type = 'hidden';
-                        id.name = 'idResena';
-                        id.value = String(idResena);
-                        form.appendChild(id);
-
-                        const redirect = document.createElement('input');
-                        redirect.type = 'hidden';
-                        redirect.name = 'redirectUrl';
-                        redirect.value = window.location.href;
-                        form.appendChild(redirect);
-
-                        document.body.appendChild(form);
-                        form.submit();
-                    }
-                });
+        async function editarResena(idResena, comentarioEncoded, estrellas) {
+            const comentario = decodeURIComponent(comentarioEncoded || '');
+            const html = `
+                <div class="form-group">
+                  <label>Comentario</label>
+                  <textarea id="swal-comentario" class="swal2-textarea" rows="5" style="width:100%">${comentario.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
+                </div>
+                <div class="form-group" style="margin-top:10px;">
+                  <label>Estrellas</label>
+                  <select id="swal-estrellas" class="swal2-select">
+                    <option value="5">★★★★★ (5)</option>
+                    <option value="4">★★★★ (4)</option>
+                    <option value="3">★★★ (3)</option>
+                    <option value="2">★★ (2)</option>
+                    <option value="1">★ (1)</option>
+                  </select>
+                </div>`;
+            const dlg = await Swal.fire({ title: 'Editar reseña', html, focusConfirm: false, showCancelButton: true, confirmButtonText: 'Guardar', cancelButtonText: 'Cancelar', didOpen: () => { const sel = document.getElementById('swal-estrellas'); if (sel) sel.value = String(estrellas || 5); } });
+            if (!dlg.isConfirmed) return;
+            const nuevoComentario = document.getElementById('swal-comentario').value.trim();
+            const nuevaEstrellas = parseInt(document.getElementById('swal-estrellas').value, 10) || 5;
+            if (!nuevoComentario) { await Swal.fire({ title: 'Requerido', text: 'El comentario no puede estar vacío', icon: 'warning', confirmButtonText: 'Aceptar', confirmButtonColor: '#405370' }); return; }
+            try {
+                const params = new URLSearchParams();
+                params.append('accion', 'actualizar');
+                params.append('idResena', idResena);
+                params.append('comentario', nuevoComentario);
+                params.append('cantidadEstrellas', nuevaEstrellas);
+                params.append('ajax', 'true');
+                const resp = await fetch('ResenaControl', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' }, body: params });
+                const data = await resp.json();
+                if (resp.ok && data.success) {
+                    await Swal.fire({ title: 'Actualizada', text: 'Reseña actualizada correctamente', icon: 'success', confirmButtonText: 'Aceptar', confirmButtonColor: '#405370' });
+                    await cargarPromedio();
+                    await cargarResenas();
+                } else {
+                    throw new Error(data.error || 'No se pudo actualizar la reseña');
+                }
+            } catch (e) {
+                Swal.fire({ title: 'Error', text: String(e.message || e), icon: 'error', confirmButtonText: 'Aceptar', confirmButtonColor: '#405370' });
+            }
         }
 
         function reportarResena(idResena) {
