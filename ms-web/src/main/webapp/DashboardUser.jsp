@@ -21,10 +21,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-       integrity="sha512-SnH5WK+bZxgIk9lKMdQXWf5fL8pT..." 
-       crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
 
        
@@ -166,13 +164,21 @@
                                 </td>
                                 <td class="descripcion-cell"><%=mat.descripcion()%></td>
              <td>
-    <%if(mat.tipo().equals("curso")){%>
+    <% if(mat.tipo().equals("curso")) { %>
+     <a href="VerResenas.jsp?idMaterial=<%=mat.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(mat.nombre(), "UTF-8")%>" 
+         class="action-btn reviews-btn">
+        <i class="fa-solid fa-star"></i> Reseñas
+    </a>
     <a href="<%=Ruta.MS_MATEDU_URL%>/CursoControll?accion=eliminar&id=<%=mat.id_materialEducativo()%>" 
        class="action-btn delete-btn" 
        onclick="return confirm('¿Estás seguro de eliminar este material?')">
         <i class="fa-solid fa-trash"></i> Eliminar
     </a>
-    <%}else if(mat.tipo().equals("libro")){%>
+    <% } else if(mat.tipo().equals("libro")) { %>
+     <a href="VerResenas.jsp?idMaterial=<%=mat.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(mat.nombre(), "UTF-8")%>" 
+         class="action-btn reviews-btn">
+        <i class="fa-solid fa-star"></i> Reseñas
+    </a>
     <a href="<%=Ruta.MS_MATEDU_URL%>/LibroControll?accion=descargar&id=<%=mat.id_materialEducativo()%>" 
        class="action-btn view-btn">
         <i class="fa-solid fa-download"></i> Descargar
@@ -182,7 +188,11 @@
        onclick="return confirm('¿Estás seguro de eliminar este material?')">
         <i class="fa-solid fa-trash"></i> Eliminar
     </a>
-    <%}else{%>
+    <% } else { %>
+     <a href="VerResenas.jsp?idMaterial=<%=mat.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(mat.nombre(), "UTF-8")%>" 
+         class="action-btn reviews-btn">
+        <i class="fa-solid fa-star"></i> Reseñas
+    </a>
     <a href="<%=Ruta.MS_MATEDU_URL%>/ArticuloControll?accion=descargar&id=<%=mat.id_materialEducativo()%>" 
        class="action-btn view-btn">
         <i class="fa-solid fa-download"></i> Descargar
@@ -192,7 +202,7 @@
        onclick="return confirm('¿Estás seguro de eliminar este material?')">
         <i class="fa-solid fa-trash"></i> Eliminar
     </a>
-    <%}%>
+    <% } %>
 </td>
                             </tr>
                             <%}%>

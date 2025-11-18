@@ -985,6 +985,24 @@ tbody td {
     cursor: pointer;
 }
 
+.reviews-btn {
+    background-color: #e3e8ff;
+    color: #667eea;
+    border: 1px solid #cdd4ff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.reviews-btn:hover {
+    background-color: #d1d8ff;
+    border-color: #bfc7ff;
+    transform: translateY(-1px);
+}
+
+a.action-btn.reviews-btn:link,
+a.action-btn.reviews-btn:visited {
+    color: #667eea !important;
+}
+
 .view-btn {
     background-color: #e8f5e9;
     color: #2e7d32;

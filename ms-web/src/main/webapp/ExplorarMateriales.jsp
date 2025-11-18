@@ -1,5 +1,4 @@
 <%@page import="dto.DtoMatEducativo"%>
-%@page import="dto.DtoMatEducativo"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.google.gson.Gson"%>
@@ -332,6 +331,11 @@
             <h1><i class="fa-solid fa-book-open"></i> Explorar Materiales Educativos</h1>
             <p>Descubre y gestiona todos los recursos disponibles en la plataforma</p>
         </div>
+        <div style="display:flex; justify-content:flex-end; margin: 10px 0 20px 0;">
+            <button onclick="history.back()" class="add-cancel-btn">
+                <i class="fa-solid fa-arrow-left"></i> Volver
+            </button>
+        </div>
         
         <div class="stats-cards">
             <div class="stat-card libros">
@@ -391,7 +395,9 @@
                             </td>
                             <td class="descripcion-cell"><%=libro.descripcion()%></td>
                             <td>
-
+                                <a href="VerResenas.jsp?idMaterial=<%=libro.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(libro.nombre(), "UTF-8")%>" class="action-btn reviews-btn">
+                                    <i class="fa-solid fa-star"></i> Reseñas
+                                </a>
                                 <a href="#" class="action-btn download-btn">
                                     <i class="fa-solid fa-download"></i> Descargar
                                 </a>
@@ -445,6 +451,9 @@
                             <td>
                                 <a href="#" class="action-btn view-btn">
                                     <i class="fa-solid fa-eye"></i> Ver
+                                </a>
+                                <a href="VerResenas.jsp?idMaterial=<%=articulo.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(articulo.nombre(), "UTF-8")%>" class="action-btn reviews-btn">
+                                    <i class="fa-solid fa-star"></i> Reseñas
                                 </a>
                                 <a href="#" class="action-btn download-btn">
                                     <i class="fa-solid fa-download"></i> Descargar
@@ -500,6 +509,9 @@
                                 <a href="#" class="action-btn view-btn">
                                     <i class="fa-solid fa-eye"></i> Ver
                                 </a>
+                                <a href="VerResenas.jsp?idMaterial=<%=curso.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(curso.nombre(), "UTF-8")%>" class="action-btn reviews-btn">
+                                    <i class="fa-solid fa-star"></i> Reseñas
+                                </a>
                             </td>
                         </tr>
                         <% } %>
@@ -507,12 +519,7 @@
                 </table>
             <% } %>
         </div>
-        <a href="<%=Ruta.MS_USUARIO_URL%>/UsuarioControll?accion=dashboardUser">
-                        <button class="back-btn">
-                            <i class="fa-solid fa-arrow-left"></i>
-                            Regresar al Dashboard
-                        </button>
-        </a>
+        
     </div>
     
     <!-- Scripts de búsqueda -->
