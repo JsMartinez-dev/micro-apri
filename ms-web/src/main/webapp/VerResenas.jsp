@@ -259,23 +259,23 @@
             }
         }
 
-        async function editarResena(idResena, comentarioEncoded, estrellas) {
-            const comentario = decodeURIComponent(comentarioEncoded || '');
-            const html = `
-                <div class="form-group">
-                  <label>Comentario</label>
-                  <textarea id="swal-comentario" class="swal2-textarea" rows="5" style="width:100%">${comentario.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
-                </div>
-                <div class="form-group" style="margin-top:10px;">
-                  <label>Estrellas</label>
-                  <select id="swal-estrellas" class="swal2-select">
-                    <option value="5">★★★★★ (5)</option>
-                    <option value="4">★★★★ (4)</option>
-                    <option value="3">★★★ (3)</option>
-                    <option value="2">★★ (2)</option>
-                    <option value="1">★ (1)</option>
-                  </select>
-                </div>`;
+                async function editarResena(idResena, comentarioEncoded, estrellas) {
+                        const comentario = decodeURIComponent(comentarioEncoded || '');
+                        const safe = comentario.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                        const html = '<div class="form-group">'
+                                + '<label>Comentario</label>'
+                                + '<textarea id="swal-comentario" class="swal2-textarea" rows="5" style="width:100%">' + safe + '</textarea>'
+                                + '</div>'
+                                + '<div class="form-group" style="margin-top:10px;">'
+                                + '<label>Estrellas</label>'
+                                + '<select id="swal-estrellas" class="swal2-select">'
+                                + '<option value="5">★★★★★ (5)</option>'
+                                + '<option value="4">★★★★ (4)</option>'
+                                + '<option value="3">★★★ (3)</option>'
+                                + '<option value="2">★★ (2)</option>'
+                                + '<option value="1">★ (1)</option>'
+                                + '</select>'
+                                + '</div>';
             const dlg = await Swal.fire({ title: 'Editar reseña', html, focusConfirm: false, showCancelButton: true, confirmButtonText: 'Guardar', cancelButtonText: 'Cancelar', didOpen: () => { const sel = document.getElementById('swal-estrellas'); if (sel) sel.value = String(estrellas || 5); } });
             if (!dlg.isConfirmed) return;
             const nuevoComentario = document.getElementById('swal-comentario').value.trim();
