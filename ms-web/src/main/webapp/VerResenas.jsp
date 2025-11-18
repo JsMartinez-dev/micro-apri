@@ -128,6 +128,21 @@
         const idUsuario = <%= userDto.id_persona() %>;
 
         window.onload = function() {
+            // Mostrar alertas de éxito si vienen por querystring y limpiar la URL
+            try {
+                const url = new URL(window.location.href);
+                const success = url.searchParams.get('success');
+                if (success === 'resena_eliminada') {
+                    Swal.fire({ title: 'Eliminada', text: 'Reseña eliminada correctamente', icon: 'success', confirmButtonText: 'Aceptar', confirmButtonColor: '#405370' });
+                } else if (success === 'resena_actualizada') {
+                    Swal.fire({ title: 'Actualizada', text: 'Reseña actualizada correctamente', icon: 'success', confirmButtonText: 'Aceptar', confirmButtonColor: '#405370' });
+                }
+                if (success) {
+                    url.searchParams.delete('success');
+                    window.history.replaceState({}, '', url);
+                }
+            } catch(e) { /* ignore */ }
+
             cargarPromedio();
             cargarResenas();
         };

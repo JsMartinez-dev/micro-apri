@@ -164,7 +164,7 @@ public class ResenaControlServlet extends HttpServlet {
 
         String jsonBody = gson.toJson(dto);
 
-        URL url = new URL(Ruta.MS_RESENAS_URL + "/resena/" + idResena);
+        URL url = new URL(Ruta.MS_RESENAS_URL + "/api/resena/" + idResena);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("PUT");
         conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
@@ -179,7 +179,8 @@ public class ResenaControlServlet extends HttpServlet {
         if (statusCode == HttpServletResponse.SC_OK) {
             String redirectUrl = request.getParameter("redirectUrl");
             if (redirectUrl != null && !redirectUrl.isEmpty()) {
-                response.sendRedirect(redirectUrl + "?success=resena_actualizada");
+                String sep = redirectUrl.contains("?") ? "&" : "?";
+                response.sendRedirect(redirectUrl + sep + "success=resena_actualizada");
             } else {
                 response.sendRedirect("DashboardUser.jsp?success=resena_actualizada");
             }
@@ -194,16 +195,25 @@ public class ResenaControlServlet extends HttpServlet {
 
         Integer idResena = Integer.parseInt(request.getParameter("idResena"));
 
-        URL url = new URL(Ruta.MS_RESENAS_URL + "/resena/" + idResena);
+        URL url = new URL(Ruta.MS_RESENAS_URL + "/ResenaControl");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("DELETE");
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        conn.setDoOutput(true);
+
+        String body = "accion=eliminar&idResena=" + idResena;
+        try (OutputStream os = conn.getOutputStream()) {
+            os.write(body.getBytes("UTF-8"));
+            os.flush();
+        }
 
         int statusCode = conn.getResponseCode();
 
         if (statusCode == HttpServletResponse.SC_OK) {
             String redirectUrl = request.getParameter("redirectUrl");
             if (redirectUrl != null && !redirectUrl.isEmpty()) {
-                response.sendRedirect(redirectUrl + "?success=resena_eliminada");
+                String sep = redirectUrl.contains("?") ? "&" : "?";
+                response.sendRedirect(redirectUrl + sep + "success=resena_eliminada");
             } else {
                 response.sendRedirect("DashboardUser.jsp?success=resena_eliminada");
             }
