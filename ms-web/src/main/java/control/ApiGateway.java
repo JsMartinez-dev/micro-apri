@@ -88,7 +88,6 @@ public class ApiGateway extends HttpServlet {
         String urlCompleta= targetUrl+pathInfo+ (queryString!=null ? "?"+queryString : "");
         
         System.out.println("RUTA COMPLETA: "+urlCompleta);
-        //Le realizamos la peticion al micro servicio  
         forwardRequest(urlCompleta,method,request,response);
         
     }
@@ -118,14 +117,12 @@ public class ApiGateway extends HttpServlet {
         conn.setRequestMethod(method);
         conn.setDoOutput(true);
 
-        // Copiamos los headers
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
             conn.setRequestProperty(headerName, request.getHeader(headerName));
         }
 
-        // Si es POST o PUT, mandamos el body del formulario
         if ("POST".equalsIgnoreCase(method) || "PUT".equalsIgnoreCase(method)) {
             StringBuilder postData = new StringBuilder();
             Enumeration<String> params = request.getParameterNames();
@@ -141,7 +138,6 @@ public class ApiGateway extends HttpServlet {
             }
         }
 
-        // Leemos la respuesta del microservicio
         int statusCode = conn.getResponseCode();
         response.setStatus(statusCode);
 

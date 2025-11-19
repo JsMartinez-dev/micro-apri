@@ -305,7 +305,10 @@
         
         Type tipoLista = new TypeToken<List<DtoMatEducativo>>(){}.getType();
         
-        List<DtoMatEducativo> listaMat = gson.fromJson(listaJson, tipoLista);
+        List<DtoMatEducativo> listaMat = new ArrayList<>();
+        if(listaJson != null && !listaJson.isEmpty()){
+            listaMat = gson.fromJson(listaJson, tipoLista);
+        }
         
         HttpSession sesion = request.getSession();
         sesion.setAttribute("usuario", dtoUser);

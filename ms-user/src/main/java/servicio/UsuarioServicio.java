@@ -23,7 +23,7 @@ public class UsuarioServicio {
     
     public UsuarioServicio(){
         fabrica = new FabConexion();
-        daoUser = fabrica.getConexionBD("POSTGRES");
+        daoUser = fabrica.getConexionBD("MONGODB");
     }
     
     public List<DtoUsuarioLogin> listUser() throws Exception{

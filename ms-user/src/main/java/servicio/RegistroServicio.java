@@ -18,7 +18,7 @@ public class RegistroServicio {
 
     public RegistroServicio() {
         fab = new FabConexion();
-        this.daoUser = fab.getConexionBD("POSTGRES");
+        this.daoUser = fab.getConexionBD("MONGODB");
     }
     
     public String hashearPassword(String password){

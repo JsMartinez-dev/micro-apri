@@ -82,7 +82,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             
 
     } catch (Exception e) {
-        System.out.println("❌ [ERROR] Ocurrió una excepción en doPost Registro:"+e.getMessage());
+        System.out.println("ERROR Ocurrió una excepción en doPost Registro:"+e.getMessage());
         String errorMsg = "Error en el servidor: " + e.getMessage();
         response.sendRedirect(Ruta.MS_WEB+"/RegistroUsuario.jsp?error=excepcion&mensaje="+
             java.net.URLEncoder.encode(errorMsg, "UTF-8")

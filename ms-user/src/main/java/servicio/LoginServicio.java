@@ -10,15 +10,18 @@ import modelo.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
 import persistencia.DaoUsuario;
 import persistencia.DaoUsuarioImpPostgres;
+import persistencia.FabConexion;
 
 
 public class LoginServicio {
    
     
     DaoUsuario daoUser;
+    FabConexion fab ;
 
     public LoginServicio() {
-        daoUser = new DaoUsuarioImpPostgres();
+        fab = new FabConexion();
+        daoUser = fab.getConexionBD("MONGODB");
     }
     
     public DtoPersonaLogin iniciarSesion(String correo, String contraseña) throws Exception{

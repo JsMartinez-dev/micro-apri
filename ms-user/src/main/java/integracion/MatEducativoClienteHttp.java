@@ -36,8 +36,8 @@ public class MatEducativoClienteHttp {
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(3000); // 3 segundos timeout
-            connection.setReadTimeout(3000);
+            connection.setConnectTimeout(2000); 
+            connection.setReadTimeout(2000);
             
             int responseCode = connection.getResponseCode();
             System.out.println("Codigo de respuesta: "+responseCode);
@@ -92,8 +92,8 @@ public class MatEducativoClienteHttp {
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(3000); // 5 segundos timeout
-            connection.setReadTimeout(3000);
+            connection.setConnectTimeout(2000); 
+            connection.setReadTimeout(2000);
             
             int responseCode = connection.getResponseCode();
             System.out.println("Codigo de respuesta: "+responseCode);

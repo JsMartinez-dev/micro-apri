@@ -2,8 +2,7 @@ package persistencia;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Updates;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import modelo.Administrador;
 import modelo.Persona;
 import modelo.Usuario;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 
 public class DaoUsuarioImpMongo implements DaoUsuario {
     
@@ -31,26 +29,27 @@ public class DaoUsuarioImpMongo implements DaoUsuario {
             System.out.println("- Nombre: " + usuario.getPrimer_nombre());
             System.out.println("- Apellido: " + usuario.getPrimer_apellido());
             System.out.println("- Correo: " + usuario.getCorreo());
-            System.out.println("- Institución: " + usuario.getInstitucion());
-            System.out.println("- Fecha nacimiento: " + usuario.getFecha_nacimiento());
-            System.out.println("- Fecha registro: " + usuario.getFecha_registro());
-            System.out.println("- Estado: " + usuario.isEstado());
-            System.out.println("- Tipo: " + usuario.getTipo());
-            
+
+            int idGenerado = usuario.getId_persona();
+            if (idGenerado <= 0) {
+                idGenerado = (int) System.currentTimeMillis();
+            }
+
             Document doc = new Document()
+                    .append("id_persona", idGenerado) 
                     .append("primer_nombre", usuario.getPrimer_nombre())
                     .append("primer_apellido", usuario.getPrimer_apellido())
                     .append("correo", usuario.getCorreo())
                     .append("institucion", usuario.getInstitucion())
                     .append("fecha_nacimiento", convertirLocalDateADate(usuario.getFecha_nacimiento()))
                     .append("fecha_registro", convertirLocalDateADate(usuario.getFecha_registro()))
-                    .append("contrasena", usuario.getContraseña())
+                    .append("contrasena", usuario.getContraseña()) 
                     .append("estado", usuario.isEstado())
                     .append("tipo", usuario.getTipo());
-            
+
             collection.insertOne(doc);
             System.out.println("INSERT ejecutado en MongoDB, ID generado: " + doc.getObjectId("_id"));
-            
+
             return true;
         } catch (Exception e) {
             System.err.println("Error al registrar usuario en MongoDB: " + e.getMessage());

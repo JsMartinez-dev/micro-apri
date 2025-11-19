@@ -20,10 +20,7 @@ public class ResenaServicio {
     public ResenaServicio() {
         this.resenaDAO = DAOFactory.getInstance().getResenaDAO();
     }
-    
-    /**
-     * Crea una nueva reseña
-     */
+
     public DtoResenaRespuesta crearResena(DtoResenaCrear dto) throws SQLException {
         // Validaciones
         if (dto.getCantidadEstrellas() < 1 || dto.getCantidadEstrellas() > 5) {
@@ -39,42 +36,30 @@ public class ResenaServicio {
         Resena resenaCreada = resenaDAO.crear(resena);
         return convertirADto(resenaCreada);
     }
-    
-    /**
-     * Obtiene una reseña por ID
-     */
+
     public DtoResenaRespuesta obtenerPorId(Integer id) throws SQLException {
         Resena resena = resenaDAO.obtenerPorId(id);
         return resena != null ? convertirADto(resena) : null;
     }
-    
-    /**
-     * Obtiene todas las reseñas de un material educativo
-     */
+
     public List<DtoResenaRespuesta> obtenerPorMaterial(Integer idMaterial) throws SQLException {
         List<Resena> resenas = resenaDAO.obtenerPorMaterial(idMaterial);
         return convertirListaADto(resenas);
     }
     
-    /**
-     * Obtiene todas las reseñas de un usuario
-     */
+ 
     public List<DtoResenaRespuesta> obtenerPorUsuario(Integer idUsuario) throws SQLException {
         List<Resena> resenas = resenaDAO.obtenerPorUsuario(idUsuario);
         return convertirListaADto(resenas);
     }
     
-    /**
-     * Obtiene todas las reseñas
-     */
+
     public List<DtoResenaRespuesta> obtenerTodas() throws SQLException {
         List<Resena> resenas = resenaDAO.obtenerTodas();
         return convertirListaADto(resenas);
     }
     
-    /**
-     * Obtiene todas las reseñas con una cantidad específica de estrellas
-     */
+
     public List<DtoResenaRespuesta> obtenerPorEstrellas(Integer cantidadEstrellas) throws SQLException {
         if (cantidadEstrellas < 1 || cantidadEstrellas > 5) {
             throw new IllegalArgumentException("La cantidad de estrellas debe estar entre 1 y 5");
@@ -82,10 +67,7 @@ public class ResenaServicio {
         List<Resena> resenas = resenaDAO.obtenerPorEstrellas(cantidadEstrellas);
         return convertirListaADto(resenas);
     }
-    
-    /**
-     * Actualiza una reseña
-     */
+
     public boolean actualizarResena(Integer id, String comentario, Integer estrellas) throws SQLException {
         if (estrellas < 1 || estrellas > 5) {
             throw new IllegalArgumentException("La cantidad de estrellas debe estar entre 1 y 5");

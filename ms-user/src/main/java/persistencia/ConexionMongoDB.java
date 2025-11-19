@@ -12,7 +12,6 @@ public class ConexionMongoDB {
     private MongoClient mongoClient;
     private MongoDatabase database;
     
-    // Configuración de conexión
     private static final String CONNECTION_STRING = "mongodb://localhost:27017";
     private static final String DATABASE_NAME = "educativo_db";
     
