@@ -398,9 +398,10 @@
                                 <a href="VerResenas.jsp?idMaterial=<%=libro.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(libro.nombre(), "UTF-8")%>" class="action-btn reviews-btn">
                                     <i class="fa-solid fa-star"></i> Reseñas
                                 </a>
-                                <a href="#" class="action-btn download-btn">
-                                    <i class="fa-solid fa-download"></i> Descargar
-                                </a>
+                                    <a href="<%=Ruta.MS_MATEDU_URL%>/LibroControll?accion=descargar&id=<%=libro.id_materialEducativo()%>" 
+                                        class="action-btn download-btn">
+                                         <i class="fa-solid fa-download"></i> Descargar
+                                    </a>
                             </td>
                         </tr>
                         <% } %>
@@ -449,13 +450,11 @@
                             </td>
                             <td class="descripcion-cell"><%=articulo.descripcion()%></td>
                             <td>
-                                <a href="#" class="action-btn view-btn">
-                                    <i class="fa-solid fa-eye"></i> Ver
-                                </a>
                                 <a href="VerResenas.jsp?idMaterial=<%=articulo.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(articulo.nombre(), "UTF-8")%>" class="action-btn reviews-btn">
                                     <i class="fa-solid fa-star"></i> Reseñas
                                 </a>
-                                <a href="#" class="action-btn download-btn">
+                                <a href="<%=Ruta.MS_MATEDU_URL%>/ArticuloControll?accion=descargar&id=<%=articulo.id_materialEducativo()%>" 
+                                   class="action-btn download-btn">
                                     <i class="fa-solid fa-download"></i> Descargar
                                 </a>
                             </td>

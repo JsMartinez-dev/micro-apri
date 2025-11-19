@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * Base de datos independiente para el microservicio de reseñas
  */
 public class ConexionDB {
-    private static final String URL = "jdbc:postgresql://localhost:5432/apri_db";
+    private static final String URL = "jdbc:postgresql://localhost:5432/SIME";
     private static final String USER = "postgres";
     private static final String PASSWORD = "123456";
     

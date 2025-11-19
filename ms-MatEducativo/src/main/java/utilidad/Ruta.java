@@ -8,5 +8,5 @@ public class Ruta {
     public static final String MS_MATEDU_URL = "http://localhost:8092/ms-MatEducativo";
     public static final String BD_URL = "jdbc:postgresql://localhost:5432/SIME";
     public static final String BD_USER = "postgres";
-    public static final String BD_PASSWORD = "postgres";
+    public static final String BD_PASSWORD = "123456";
 }
