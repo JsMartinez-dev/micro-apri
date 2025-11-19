@@ -504,13 +504,14 @@
                                 </span>
                             </td>
                             <td class="descripcion-cell"><%=curso.descripcion()%></td>
-                            <td>
-                                <a href="#" class="action-btn view-btn">
-                                    <i class="fa-solid fa-eye"></i> Ver
-                                </a>
-                                <a href="VerResenas.jsp?idMaterial=<%=curso.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(curso.nombre(), "UTF-8")%>" class="action-btn reviews-btn">
-                                    <i class="fa-solid fa-star"></i> Reseñas
-                                </a>
+                                <td>
+                                    <a href="VerCurso.jsp?idCurso=<%=curso.id_materialEducativo()%>&nombreCurso=<%=URLEncoder.encode(curso.nombre(), "UTF-8")%>" class="action-btn view-btn">
+                                        <i class="fa-solid fa-eye"></i> Ver
+                                    </a>
+                                    <a href="VerResenas.jsp?idMaterial=<%=curso.id_materialEducativo()%>&nombreMaterial=<%=URLEncoder.encode(curso.nombre(), "UTF-8")%>" class="action-btn reviews-btn">
+                                        <i class="fa-solid fa-star"></i> Reseñas
+                                    </a>
+                                </td>
                             </td>
                         </tr>
                         <% } %>
@@ -521,9 +522,7 @@
         
     </div>
     
-    <!-- Scripts de búsqueda -->
     <script>
-        // Función genérica de búsqueda
         function setupSearch(inputId, tableId) {
             document.getElementById(inputId).addEventListener("keyup", function() {
                 let filtro = this.value.toLowerCase();
@@ -544,7 +543,6 @@
             });
         }
         
-        // Inicializar búsquedas
         setupSearch("buscarLibros", "tablaLibros");
         setupSearch("buscarArticulos", "tablaArticulos");
         setupSearch("buscarCursos", "tablaCursos");

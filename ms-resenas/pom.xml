@@ -17,7 +17,11 @@
     </properties>
     
     <dependencies>
-        <!-- Jakarta Servlet API -->
+        <dependency>
+            <groupId>ListCircular-Apri</groupId>
+            <artifactId>ListApri</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
@@ -25,14 +29,12 @@
             <scope>provided</scope>
         </dependency>
         
-        <!-- PostgreSQL Driver -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.7</version>
         </dependency>
         
-        <!-- Gson para JSON -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

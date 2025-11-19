@@ -105,18 +105,15 @@ private void descargarArticulo(HttpServletRequest request, HttpServletResponse r
         
         int idMaterial = Integer.parseInt(idMatStr);
         
-        // Obtener nombre del artículo
         String nombreArticulo = articuloServicio.obtenerNombreArticulo(idMaterial);
         String nombreArchivo = nombreArticulo.replaceAll("[^a-zA-Z0-9.-]", "_") + ".pdf";
         
         // Obtener el PDF
         pdfStream = articuloServicio.descargarArticuloPDF(idMaterial);
         
-        // Configurar respuesta
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=\"" + nombreArchivo + "\"");
         
-        // Copiar stream
         byte[] buffer = new byte[4096];
         int bytesRead;
         

@@ -2,6 +2,7 @@
 package persistencia;
 
 import dto.DtoMatEducativo;
+import edu.apri.collections.CircularList;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
@@ -52,7 +53,7 @@ public class DaoLibroImp implements DaoLibro{
     @Override
     public List<DtoMatEducativo> buscarListUser(int user) throws Exception {
         
-        List<DtoMatEducativo> listaM = new ArrayList<>();
+        List<DtoMatEducativo> listaM = new CircularList<>();
         
         String sql = "SELECT * FROM materiales_educativos WHERE id_usuario = ? AND estado = TRUE";
         

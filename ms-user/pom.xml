@@ -46,8 +46,12 @@
             <artifactId>postgresql</artifactId> 
             <version>42.7.7</version> 
         </dependency> 
-        <!-- dependency ListApri removed: using native collections instead -->
-    </dependencies> 
+        <dependency>
+            <groupId>ListCircular-Apri</groupId>
+            <artifactId>ListApri</artifactId>
+            <version>1.0</version>
+        </dependency>
+  </dependencies> 
     
     <build>
         <plugins>

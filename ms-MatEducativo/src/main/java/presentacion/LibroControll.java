@@ -81,7 +81,6 @@ public class LibroControll extends HttpServlet {
             List<DtoMatEducativo> listaMateriales = subirMatServicio.buscarMaterialPorUsuario(idPersona);
             System.out.println("Lista de materialitos: "+listaMateriales);
             if (listaMateriales != null) {
-                // Convertir a JSON y enviar
                 String jsonResponse = gson.toJson(listaMateriales);
                 
                 try (PrintWriter out = response.getWriter()) {
@@ -103,10 +102,7 @@ public class LibroControll extends HttpServlet {
             enviarError(response, "Error interno: " + e.getMessage());
         }
     }
-    
-    /**
-     * Envía un mensaje de error en formato JSON
-     */
+
     private void enviarError(HttpServletResponse response, String mensaje) throws IOException {
         ErrorResponse error = new ErrorResponse(false, mensaje);
         String jsonError = gson.toJson(error);

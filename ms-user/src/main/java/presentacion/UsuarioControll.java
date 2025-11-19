@@ -207,11 +207,10 @@ import utilidad.Ruta;
     
     HttpSession miSesion = request.getSession(false);
     
-    // Validar sesión
     if(miSesion == null || miSesion.getAttribute("usuario") == null){
         try {
             response.sendRedirect(Ruta.MS_WEB + "/InicioSesionUsuario.jsp?error=sesionExpirada");
-            return; // IMPORTANTE: detener ejecución
+            return; 
         } catch (IOException ex) {
             System.err.println("Error al redirigir: " + ex.getMessage());
             return;
@@ -222,14 +221,12 @@ import utilidad.Ruta;
     System.out.println("DTO desde el UsuarioControl: " + dtoUser);
     
     try {
-        // Obtener lista de materiales
         List<DtoMatEducativo> listMat = matEduCliente.listarMateriales();  
         System.out.println("Lista de materiales desde Usuario controll: " + listMat);
         
         if(listMat != null && !listMat.isEmpty()) {
             System.out.println("Materiales encontrados: " + listMat.size());
             
-            // Convertir a JSON
             String jsonUsuario = gson.toJson(dtoUser);
             String jsonLista = gson.toJson(listMat);
             
@@ -242,7 +239,6 @@ import utilidad.Ruta;
             
         } else {
             System.out.println("No se encontraron materiales o la lista está vacía");
-            // Redirigir con mensaje de error
             response.sendRedirect(Ruta.MS_WEB + "/DashboardUser.jsp?error=noMateriales");
         }
         

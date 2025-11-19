@@ -33,18 +33,15 @@ public class MatEducativoClienteHttp {
             System.out.println("Ruta para buscar la lista de Material: "+urlString);
             URL url = new URL(urlString);
             
-            // Configurar conexión
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
-            connection.setConnectTimeout(3000); // 5 segundos timeout
+            connection.setConnectTimeout(3000); // 3 segundos timeout
             connection.setReadTimeout(3000);
             
-            // Verificar código de respuesta
             int responseCode = connection.getResponseCode();
             System.out.println("Codigo de respuesta: "+responseCode);
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Leer respuesta
                 reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream(), "UTF-8")
                 );
@@ -55,7 +52,6 @@ public class MatEducativoClienteHttp {
                     response.append(line);
                 }
                 
-                // Convertir JSON a lista de objetos
                 Type listType = new TypeToken<List<DtoMatEducativo>>(){}.getType();
                 List<DtoMatEducativo> materiales = gson.fromJson(response.toString(), listType);
                 
@@ -75,7 +71,6 @@ public class MatEducativoClienteHttp {
             ex.printStackTrace();
             return null;
         } finally {
-            // Cerrar recursos
             try {
                 if (reader != null) reader.close();
                 if (connection != null) connection.disconnect();
@@ -94,14 +89,12 @@ public class MatEducativoClienteHttp {
             System.out.println("Ruta para buscar la lista de Material aaaaaaa: "+urlString);
             URL url = new URL(urlString);
             
-            // Configurar conexión
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Accept", "application/json");
             connection.setConnectTimeout(3000); // 5 segundos timeout
             connection.setReadTimeout(3000);
             
-            // Verificar código de respuesta
             int responseCode = connection.getResponseCode();
             System.out.println("Codigo de respuesta: "+responseCode);
             if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -116,7 +109,6 @@ public class MatEducativoClienteHttp {
                     response.append(line);
                 }
                 
-                // Convertir JSON a lista de objetos
                 Type listType = new TypeToken<List<DtoMatEducativo>>(){}.getType();
                 List<DtoMatEducativo> materiales = gson.fromJson(response.toString(), listType);
                 
@@ -136,7 +128,6 @@ public class MatEducativoClienteHttp {
             ex.printStackTrace();
             return null;
         } finally {
-            // Cerrar recursos
             try {
                 if (reader != null) reader.close();
                 if (connection != null) connection.disconnect();

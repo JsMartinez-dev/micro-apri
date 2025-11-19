@@ -6,8 +6,6 @@ package presentacion;
 
 import com.google.gson.Gson;
 import dto.DtoLeccionLista;
-import dto.DtoModuloLista;
-import dto.DtoModuloRegistrar;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
