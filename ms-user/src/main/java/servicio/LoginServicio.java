@@ -9,7 +9,6 @@ import modelo.Persona;
 import modelo.Usuario;
 import org.mindrot.jbcrypt.BCrypt;
 import persistencia.DaoUsuario;
-import persistencia.DaoUsuarioImpPostgres;
 import persistencia.FabConexion;
 
 
