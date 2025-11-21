@@ -167,7 +167,7 @@ import utilidad.Ruta;
                 System.out.println("NOT NULLL");
                 String jsonAdmin = gson.toJson(dtoAdmin);
                 String listaJson = gson.toJson(listaU);
-                String url = Ruta.MS_WEB+"/DashboardAdmin_GU.jsp"+"?admin="+URLEncoder.encode(jsonAdmin, "UTF-8")
+                String url = Ruta.MS_WEB+"/DashboardAdmin.jsp"+"?admin="+URLEncoder.encode(jsonAdmin, "UTF-8")
                         +"&lista=" + URLEncoder.encode(listaJson, "UTF-8");                                    
                 response.sendRedirect(url);
             }else{

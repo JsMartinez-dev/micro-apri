@@ -20,7 +20,7 @@ public class LoginServicio {
 
     public LoginServicio() {
         fab = new FabConexion();
-        daoUser = fab.getConexionBD("MONGODB");
+        daoUser = fab.getConexionBD("POSTGRES");
     }
     
     public DtoPersonaLogin iniciarSesion(String correo, String contraseña) throws Exception{
